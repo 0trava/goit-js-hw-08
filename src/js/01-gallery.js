@@ -8,6 +8,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 console.log(galleryItems);
 
+
 const galleryLibraryEL = document.querySelector('.gallery');
 
 const imagesListTemplate = ({preview, original, description}) => {
