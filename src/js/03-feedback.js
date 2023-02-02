@@ -5,7 +5,7 @@ import throttle from "lodash.throttle";
 
 // створюємо змінну для зручності
 const STORAGE_KEY = 'feedback-form-state';
-let textForStorage ={};
+let textForStorage ={message:"", email:""};
 
 const formInputEL = {
    form: document.querySelector('.feedback-form'),
@@ -13,7 +13,7 @@ const formInputEL = {
    input: document.querySelector('.feedback-form input'),
 };
 
-console.log(formInputEL);
+// console.log(formInputEL);
 
 
 // Запускаємо слухачів подій
@@ -32,29 +32,36 @@ function onForfSubmit(evt){
     // Очищюємо поля
     evt.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
+    textForStorage ={message:"", email:""};
 };
 
 // Команди при вводі тексту в textarea та input
-function onTextareaInput(evt) {
-    textForStorage.message = evt.target.value;
+function onTextareaInput(e) {
+    if (localStorage.getItem(STORAGE_KEY)) {
+        textForStorage = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    };
+
+    textForStorage.message = e.target.value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(textForStorage));
+
 };
 
 function onInputInput(evt) {
+    if (localStorage.getItem(STORAGE_KEY)) {
+        textForStorage = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    };
     textForStorage.email = evt.target.value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(textForStorage));
+
 };
 
 // Команда перевірки, наявного тексту в STORAGE_KEY, при старті
 function saveStorageText () {
-    const savedMassege = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
-    if (savedMassege.message) {
-        formInputEL.textarea.value = savedMassege.message;
-    }
-    if (savedMassege.email) {
-        formInputEL.input.value = savedMassege.email;
-    }
+    const savedMassege = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    formInputEL.textarea.value = savedMassege.message;
+    formInputEL.input.value = savedMassege.email;
+
 };
 
 
