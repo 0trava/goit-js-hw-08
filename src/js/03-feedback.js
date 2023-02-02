@@ -1,6 +1,6 @@
 
 // Додаємо до проекту біліотеку через термінал
-// $ npm i --save lodash.throttle
+// Команда $ npm i --save lodash.throttle
 import throttle from "lodash.throttle";
 
 // створюємо змінну для зручності
@@ -38,16 +38,14 @@ function onForfSubmit(evt){
 function onTextareaInput(evt) {
     textForStorage.message = evt.target.value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(textForStorage));
-        // console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
 };
 
 function onInputInput(evt) {
     textForStorage.email = evt.target.value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(textForStorage));
-        // console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
 };
 
-// Команда перевірки наявного тексту в STORAGE_KEY при старті
+// Команда перевірки, наявного тексту в STORAGE_KEY, при старті
 function saveStorageText () {
     const savedMassege = JSON.parse(localStorage.getItem(STORAGE_KEY));
 

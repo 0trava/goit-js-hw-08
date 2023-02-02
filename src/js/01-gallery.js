@@ -1,16 +1,17 @@
-// Add imports above this line
-import { galleryItems } from './gallery-items';
-// Change code below this line
-// Описан в документации
+
+
+// Додаємо до проекту бібліотеку SimpleLightbox як залежність проекту через npm.
+// Команда $ npm install simplelightbox
+// Додатково імпортуємо стилі для плеєра
 import SimpleLightbox from 'simplelightbox';
-// Дополнительный импорт стилей
 import "simplelightbox/dist/simple-lightbox.min.css";
+import { galleryItems } from './gallery-items';
 
-console.log(galleryItems);
-
-
+// Починаэмо відстежувати подію 
 const galleryLibraryEL = document.querySelector('.gallery');
 
+
+// Додаємо зображення на сайт з {galleryItems}
 const imagesListTemplate = ({preview, original, description}) => {
     return `
     <a class="gallery__item" href="${original}">
@@ -22,19 +23,16 @@ const addImg = galleryItems.map(imagesListTemplate).join('');
 galleryLibraryEL.insertAdjacentHTML("afterbegin", addImg);
 
 // Додаємо дію при кліку
-
 galleryLibraryEL.addEventListener('click', oneGalleryImgClick );
 
 // --------------------------------------------------------------------------------
 function oneGalleryImgClick (evt){
-    const imageSelected = evt.target.getAttribute("data-source");
-  
     // Відміна поведінки за замовчуванням (відміна завантаження файлу)
     evt.preventDefault();
+    const imageSelected = evt.target.getAttribute("data-source");
 
     // Перевірка що клік на зображенні
     if (!imageSelected){return;}
-
 };
     // --------------------------------------------------------------------------------
 // Підключення SimpleLightbox (модальне вікно)
