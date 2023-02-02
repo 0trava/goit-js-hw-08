@@ -13,9 +13,6 @@ const formInputEL = {
    input: document.querySelector('.feedback-form input'),
 };
 
-// console.log(formInputEL);
-
-
 // Запускаємо слухачів подій
 formInputEL.form.addEventListener('submit', onForfSubmit);
 formInputEL.textarea.addEventListener('input', throttle(onTextareaInput, 500));
@@ -57,11 +54,11 @@ function onInputInput(evt) {
 
 // Команда перевірки, наявного тексту в STORAGE_KEY, при старті
 function saveStorageText () {
-
+  if (localStorage.getItem(STORAGE_KEY)) {
     const savedMassege = JSON.parse(localStorage.getItem(STORAGE_KEY));
     formInputEL.textarea.value = savedMassege.message;
     formInputEL.input.value = savedMassege.email;
-
+  }
 };
 
 
